@@ -170,6 +170,38 @@ Public Class player
         sugar += addsugar
         Form1.Label5.Text = Log_in.newplayer.getsugar()
     End Function
+
+    Function getreputation()
+        Return reputation
+    End Function
+    Function setreputation(addreputation As Double)
+        reputation += addreputation
+    End Function
+
+
+    Function getprofit()
+        Return profit
+    End Function
+    Function setprofit(addprofit As Double)
+        profit += addprofit
+    End Function
+
+    'expected
+
+    Function getcustomers()
+        Return customers
+    End Function
+    Function setcustomers(addcustomers As Double)
+        customers += addcustomers
+    End Function
+
+    Function getexpected()
+        Return expected
+    End Function
+    Function setexpected(addexpected As Double)
+        expected += addexpected
+    End Function
+
 End Class
 
 Public Class humanPlayer

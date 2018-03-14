@@ -76,4 +76,4 @@ Module Database
     End Module
 
 
-'End Class
+'end class
