@@ -1,5 +1,6 @@
 ﻿Public Class Form1
     Dim addstock As Integer
+    Public weather As Integer
 
     Private Sub GetStock(lemon, sugar, ice)
         If addstock = 1 Then
@@ -75,6 +76,21 @@
         Composition.Label6.Text = Log_in.newplayer.getice()
         Composition.Show()
     End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Randomize()
+
+        weather = CInt(Rnd() * 2)
+        If weather = 0 Then
+            PictureBox6.ImageLocation = "U:\Pictures\sunny.PNG"
+        ElseIf weather = 1 Then
+            PictureBox6.ImageLocation = "U:\Pictures\cold.PNG"
+        ElseIf weather = 2 Then
+            PictureBox6.ImageLocation = "U:\Pictures\meh.png"
+        Else
+
+        End If
+    End Sub
 End Class
 
 
@@ -89,17 +105,20 @@ Public Class player
     Private progress As Double
     Private varience As Integer
     Private actualsales As Integer
+    Private deviation As Double
 
     Private ideallemon As Double
     Private idealice As Double
     Private idealsugar As Double
-    Private idealhot As Integer
-    Private idealcold As Double
+    Private composition(2) As Double
 
     Private profit As Integer
     Private totalsales As Integer
     Private money As Integer
     Private expected As Integer
+
+    Private upgradeMultiplier As Integer
+    Private weatherMultiplier As Integer
 
 
     Private Number As Integer 'Ordinal number of the player in the database
@@ -186,7 +205,49 @@ Public Class player
         profit += addprofit
     End Function
 
-    'expected
+
+
+
+
+    Function setvarience(addvarience As Integer)
+        varience = addvarience
+    End Function
+    Function getvarience()
+        Return varience
+    End Function
+    Function setdeviation(adddeviation As Integer)
+        varience = adddeviation
+    End Function
+    Function getdeviation()
+        Return deviation
+    End Function
+
+    Function setideallemon(addideallemon As Integer)
+        ideallemon = addideallemon
+    End Function
+    Function getideallemon()
+        Return ideallemon
+    End Function
+    Function setidealice(addidealice As Integer)
+        idealice = addidealice
+    End Function
+    Function getidealice()
+        Return idealice
+    End Function
+    Function setidealsugar(addidealsugar As Integer)
+        idealsugar = addidealsugar
+    End Function
+    Function getidealsugar()
+        Return idealsugar
+    End Function
+
+    Function setcomposition(number As Integer, addcomposition As Integer)
+        composition(number) = addcomposition
+    End Function
+    Function getcomposition(number As Integer)
+        Return composition(number)
+    End Function
+
 
     Function getcustomers()
         Return customers
@@ -200,6 +261,27 @@ Public Class player
     End Function
     Function setexpected(addexpected As Double)
         expected += addexpected
+    End Function
+
+    Function getactualsales()
+        Return actualsales
+    End Function
+    Function setactualsales(addactualsales As Integer)
+        actualsales = addactualsales
+    End Function
+
+    Function getupgradeMultiplier()
+        Return upgradeMultiplier
+    End Function
+    Function setupgradeMultiplier(addupgradeMultiplier As Integer)
+        upgradeMultiplier = addupgradeMultiplier
+    End Function
+
+    Function getweatherMultiplier()
+        Return weatherMultiplier
+    End Function
+    Function setweatherMultiplier(addweatherMultiplier As Integer)
+        weatherMultiplier = addweatherMultiplier
     End Function
 
 End Class

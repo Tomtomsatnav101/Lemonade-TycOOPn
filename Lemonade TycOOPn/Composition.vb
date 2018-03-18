@@ -42,4 +42,105 @@
         End If
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+
+        If CInt(TextBox1.Text) * CInt(TextBox4.Text) <= Log_in.newplayer.getlemons Or CInt(TextBox2.Text) * CInt(TextBox4.Text) <= Log_in.newplayer.getsugar Or CInt(TextBox3.Text) * CInt(TextBox4.Text) <= Log_in.newplayer.getice Then
+
+
+
+
+            Dim num As New Random
+            Log_in.newplayer.setvarience(num.Next(-10, 10))
+            Log_in.newplayer.setdeviation(Log_in.newplayer.getvarience * Log_in.newplayer.getreputation) 'If this works i'll be so proud of myself
+            Log_in.newplayer.setcustomers(Log_in.newplayer.getdeviation)
+
+
+            If Log_in.newplayer.getcustomers <= CInt(TextBox4.Text) Then
+                Log_in.newplayer.setactualsales(Log_in.newplayer.getcustomers)
+            Else
+                Log_in.newplayer.setactualsales(CInt(TextBox4.Text))
+            End If
+
+
+            Log_in.newplayer.setlemons(-1 * Log_in.newplayer.getactualsales * CInt(TextBox1.Text))
+            Log_in.newplayer.setsugar(-1 * Log_in.newplayer.getactualsales * CInt(TextBox2.Text))
+            Log_in.newplayer.setice(-1 * Log_in.newplayer.getactualsales * CInt(TextBox3.Text))
+
+
+
+            Log_in.newplayer.setcomposition(0, CInt(TextBox1.Text))
+            Log_in.newplayer.setcomposition(1, CInt(TextBox2.Text))
+            Log_in.newplayer.setcomposition(2, CInt(TextBox3.Text))
+
+            Log_in.newplayer.setideallemon((Log_in.newplayer.getcomposition(0) / Log_in.newplayer.getcomposition(0) + Log_in.newplayer.getcomposition(1) + Log_in.newplayer.getcomposition(2)))
+            Log_in.newplayer.setidealsugar((Log_in.newplayer.getcomposition(1) / Log_in.newplayer.getcomposition(0) + Log_in.newplayer.getcomposition(1) + Log_in.newplayer.getcomposition(2)))
+            Log_in.newplayer.setidealice((Log_in.newplayer.getcomposition(2) / Log_in.newplayer.getcomposition(0) + Log_in.newplayer.getcomposition(1) + Log_in.newplayer.getcomposition(2)))
+
+            If Form1.weather = 2 And (Log_in.newplayer.getideallemon + Log_in.newplayer.getidealsugar + Log_in.newplayer.getidealice) = 1 Then
+                Log_in.newplayer.setweatherMultiplier(2)
+                MsgBox("MEHHY")
+            ElseIf Form1.weather = 0 And Log_in.newplayer.getideallemon = 2 * Log_in.newplayer.getidealsugar And Log_in.newplayer.getidealice = 3 * Log_in.newplayer.getidealsugar Then
+                Log_in.newplayer.setweatherMultiplier(2)
+                MsgBox("SUNNY")
+            ElseIf Form1.weather = 1 And Log_in.newplayer.getideallemon = Log_in.newplayer.getidealice And Log_in.newplayer.getidealsugar = 2 * Log_in.newplayer.getidealice Then
+                Log_in.newplayer.setweatherMultiplier(2)
+                MsgBox("COLD")
+            Else
+                Log_in.newplayer.setweatherMultiplier(1)
+            End If
+
+            'MEH 1 lemon, 1 ice, 1 sugar
+
+            'SUNNY 2 lemon, 3 ice, 1 sugar
+
+            'COLD 1 lemon, 1 ice, 2 sugar 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            setweather()
+        Else
+            MsgBox("Error. Not enough ingridients")
+        End If
+    End Sub
+    Sub setweather()
+        Randomize()
+
+        Form1.weather = CInt(Rnd() * 2)
+        If Form1.weather = 0 Then
+            Form1.PictureBox6.ImageLocation = "U:\Pictures\sunny.PNG"
+        ElseIf form1.weather = 1 Then
+            Form1.PictureBox6.ImageLocation = "U:\Pictures\cold.PNG"
+        ElseIf form1.weather = 2 Then
+            Form1.PictureBox6.ImageLocation = "U:\Pictures\meh.png"
+        Else
+
+        End If
+    End Sub
+
+
+    Sub getSalesBar(totalsales)
+
+
+    End Sub
+
 End Class

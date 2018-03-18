@@ -61,7 +61,7 @@ Partial Class Composition
         '
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button1.Location = New System.Drawing.Point(155, 169)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(259, 57)
         Me.Button1.TabIndex = 0
@@ -137,7 +137,7 @@ Partial Class Composition
         'Button2
         '
         Me.Button2.Location = New System.Drawing.Point(295, 31)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(4)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(31, 27)
         Me.Button2.TabIndex = 12
@@ -147,7 +147,7 @@ Partial Class Composition
         'Button3
         '
         Me.Button3.Location = New System.Drawing.Point(388, 31)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(4)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(31, 27)
         Me.Button3.TabIndex = 13
@@ -157,7 +157,7 @@ Partial Class Composition
         'TextBox1
         '
         Me.TextBox1.Location = New System.Drawing.Point(331, 33)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(52, 22)
         Me.TextBox1.TabIndex = 14
@@ -166,7 +166,7 @@ Partial Class Composition
         'TextBox2
         '
         Me.TextBox2.Location = New System.Drawing.Point(331, 65)
-        Me.TextBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(52, 22)
         Me.TextBox2.TabIndex = 17
@@ -175,7 +175,7 @@ Partial Class Composition
         'Button4
         '
         Me.Button4.Location = New System.Drawing.Point(388, 64)
-        Me.Button4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button4.Margin = New System.Windows.Forms.Padding(4)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(31, 27)
         Me.Button4.TabIndex = 16
@@ -185,7 +185,7 @@ Partial Class Composition
         'Button5
         '
         Me.Button5.Location = New System.Drawing.Point(295, 64)
-        Me.Button5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button5.Margin = New System.Windows.Forms.Padding(4)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(31, 27)
         Me.Button5.TabIndex = 15
@@ -195,7 +195,7 @@ Partial Class Composition
         'TextBox3
         '
         Me.TextBox3.Location = New System.Drawing.Point(331, 100)
-        Me.TextBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(52, 22)
         Me.TextBox3.TabIndex = 20
@@ -204,7 +204,7 @@ Partial Class Composition
         'Button6
         '
         Me.Button6.Location = New System.Drawing.Point(388, 98)
-        Me.Button6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button6.Margin = New System.Windows.Forms.Padding(4)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(31, 27)
         Me.Button6.TabIndex = 19
@@ -214,7 +214,7 @@ Partial Class Composition
         'Button7
         '
         Me.Button7.Location = New System.Drawing.Point(295, 97)
-        Me.Button7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button7.Margin = New System.Windows.Forms.Padding(4)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(31, 27)
         Me.Button7.TabIndex = 18
@@ -224,7 +224,7 @@ Partial Class Composition
         'TextBox4
         '
         Me.TextBox4.Location = New System.Drawing.Point(331, 134)
-        Me.TextBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TextBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(52, 22)
         Me.TextBox4.TabIndex = 24
@@ -233,7 +233,7 @@ Partial Class Composition
         'Button8
         '
         Me.Button8.Location = New System.Drawing.Point(388, 134)
-        Me.Button8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button8.Margin = New System.Windows.Forms.Padding(4)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(31, 27)
         Me.Button8.TabIndex = 23
@@ -243,7 +243,7 @@ Partial Class Composition
         'Button9
         '
         Me.Button9.Location = New System.Drawing.Point(295, 133)
-        Me.Button9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button9.Margin = New System.Windows.Forms.Padding(4)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(31, 27)
         Me.Button9.TabIndex = 22
@@ -264,7 +264,7 @@ Partial Class Composition
         'ProgressBar1
         '
         Me.ProgressBar1.Location = New System.Drawing.Point(199, 260)
-        Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ProgressBar1.Margin = New System.Windows.Forms.Padding(4)
         Me.ProgressBar1.Maximum = 5
         Me.ProgressBar1.Name = "ProgressBar1"
         Me.ProgressBar1.RightToLeft = System.Windows.Forms.RightToLeft.No
@@ -294,7 +294,7 @@ Partial Class Composition
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(947, 89)
         Me.Panel1.TabIndex = 27
@@ -302,7 +302,7 @@ Partial Class Composition
         'PictureBox3
         '
         Me.PictureBox3.Location = New System.Drawing.Point(347, 4)
-        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(121, 97)
         Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -312,7 +312,7 @@ Partial Class Composition
         'PictureBox2
         '
         Me.PictureBox2.Location = New System.Drawing.Point(153, 7)
-        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(117, 80)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -322,7 +322,7 @@ Partial Class Composition
         'PictureBox1
         '
         Me.PictureBox1.Location = New System.Drawing.Point(15, 15)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(81, 65)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -353,7 +353,7 @@ Partial Class Composition
         Me.Panel2.Controls.Add(Me.Label11)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Location = New System.Drawing.Point(0, 98)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(564, 319)
         Me.Panel2.TabIndex = 28
@@ -361,7 +361,7 @@ Partial Class Composition
         'Button10
         '
         Me.Button10.Location = New System.Drawing.Point(441, 260)
-        Me.Button10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button10.Margin = New System.Windows.Forms.Padding(4)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(100, 28)
         Me.Button10.TabIndex = 27
@@ -376,7 +376,7 @@ Partial Class Composition
         Me.ClientSize = New System.Drawing.Size(557, 415)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.Name = "Composition"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
