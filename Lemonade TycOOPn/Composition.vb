@@ -96,14 +96,22 @@
 
             'COLD 1 lemon, 1 ice, 2 sugar 
 
+            Log_in.newplayer.settotalsales(Log_in.newplayer.getactualsales)
+            Log_in.newplayer.setsalesMultiplier(((Math.Log10(Log_in.newplayer.gettotalsales)) / 100) + 1)
+
+            If Math.Log10(Log_in.newplayer.gettotalsales) >= 5 Then
+                ProgressBar1.Value = 5
+            Else
+                ProgressBar1.Value = Math.Log10(Log_in.newplayer.gettotalsales)
+            End If
 
 
+            Log_in.newplayer.setmoneybefore(Log_in.newplayer.getmoney)
 
 
+            Log_in.newplayer.setprofit(((CInt(TextBox1.Text) + CInt(TextBox2.Text) + CInt(TextBox3.Text)) * Log_in.newplayer.getactualsales) * Log_in.newplayer.getweatherMultiplier * Log_in.newplayer.getsalesMultiplier * Log_in.newplayer.getupgradeMultiplier)
 
-
-
-
+            Log_in.newplayer.setmoneyafter(Log_in.newplayer.getmoneybefore + Log_in.newplayer.getprofit)
 
 
 
@@ -138,9 +146,5 @@
     End Sub
 
 
-    Sub getSalesBar(totalsales)
-
-
-    End Sub
 
 End Class

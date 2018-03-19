@@ -112,13 +112,17 @@ Public Class player
     Private idealsugar As Double
     Private composition(2) As Double
 
+
     Private profit As Integer
+    Private moneybefore As Integer
+    Private moneyafter As Integer
     Private totalsales As Integer
     Private money As Integer
     Private expected As Integer
 
     Private upgradeMultiplier As Integer
     Private weatherMultiplier As Integer
+    Private salesMultiplier As Double
 
 
     Private Number As Integer 'Ordinal number of the player in the database
@@ -149,6 +153,7 @@ Public Class player
             Form1.Label6.Text = 100
             expected = 100                      'Database.database(Database.usercount).
             Number = usercount
+            upgradeMultiplier = 1
             Log_in.Hide()
             Form1.Show()
 
@@ -202,12 +207,23 @@ Public Class player
         Return profit
     End Function
     Function setprofit(addprofit As Double)
-        profit += addprofit
+        profit = addprofit
+    End Function
+
+    Function getmoneybefore()
+        Return moneybefore
+    End Function
+    Function setmoneybefore(addmoneybefore As Integer)
+        moneybefore = addmoneybefore
     End Function
 
 
-
-
+    Function getmoneyafter()
+        Return moneyafter
+    End Function
+    Function setmoneyafter(addmoneyafter As Integer)
+        moneyafter = addmoneyafter
+    End Function
 
     Function setvarience(addvarience As Integer)
         varience = addvarience
@@ -283,6 +299,22 @@ Public Class player
     Function setweatherMultiplier(addweatherMultiplier As Integer)
         weatherMultiplier = addweatherMultiplier
     End Function
+
+    Function getsalesMultiplier()
+        Return salesMultiplier
+    End Function
+    Function setsalesMultiplier(addsalesMultiplier As Double)
+        salesMultiplier = addsalesMultiplier
+    End Function
+
+    Function gettotalsales()
+        Return totalsales
+    End Function
+    Function settotalsales(addtotalsales As Integer)
+        totalsales += addtotalsales
+    End Function
+
+
 
 End Class
 
