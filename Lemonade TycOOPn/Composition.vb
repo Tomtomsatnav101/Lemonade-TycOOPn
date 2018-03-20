@@ -44,24 +44,14 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-
+        '
         If CInt(TextBox1.Text) * CInt(TextBox4.Text) <= Log_in.newplayer.getlemons Or CInt(TextBox2.Text) * CInt(TextBox4.Text) <= Log_in.newplayer.getsugar Or CInt(TextBox3.Text) * CInt(TextBox4.Text) <= Log_in.newplayer.getice Then
 
 
 
 
-            Dim num As New Random
-            Log_in.newplayer.setvarience(num.Next(-10, 10))
-            Log_in.newplayer.setdeviation(Log_in.newplayer.getvarience * Log_in.newplayer.getreputation) 'If this works i'll be so proud of myself
-            Log_in.newplayer.setcustomers(Log_in.newplayer.getdeviation)
-
-
-            If Log_in.newplayer.getcustomers <= CInt(TextBox4.Text) Then
-                Log_in.newplayer.setactualsales(Log_in.newplayer.getcustomers)
-            Else
-                Log_in.newplayer.setactualsales(CInt(TextBox4.Text))
-            End If
-
+            Getsales()
+            '    MsgBox(Log_in.newplayer.getactualsales.ToString)
 
             Log_in.newplayer.setlemons(-1 * Log_in.newplayer.getactualsales * CInt(TextBox1.Text))
             Log_in.newplayer.setsugar(-1 * Log_in.newplayer.getactualsales * CInt(TextBox2.Text))
@@ -115,21 +105,83 @@
 
 
 
+            If Log_in.newplayer.getprofit < 0 Then
+                Form1.PictureBox5.ImageLocation = "U:\Pictures\redprofit.png"
+                Form1.Label12.ForeColor = Color.Red
+            ElseIf log_in.newplayer.getprofit > -1 Then
+                Form1.PictureBox5.ImageLocation = "U:\Pictures\profit.png"
+                Form1.Label12.ForeColor = Color.Green
+            Else
+                Form1.Label12.ForeColor = Color.Black
+            End If
+
+            If Log_in.newplayer.getactualsales = Log_in.newplayer.getcustomers Then
+                If Log_in.newplayer.getreputation >= 1.5 Then
+                Else
+                    Log_in.newplayer.setreputation(0.1)
+                    Log_in.newplayer.setcustomers(Log_in.newplayer.getcustomers * 0.1)
+                End If
+            Else
+                If Log_in.newplayer.getreputation <= 0.5 Then
+                Else
+                    Log_in.newplayer.setreputation(-0.1)
+                    Log_in.newplayer.setcustomers(Log_in.newplayer.getcustomers * -0.1)
+                End If
+            End If
+
+
+            If Log_in.newplayer.getweatherMultiplier = 2 Then
+                If Log_in.newplayer.getreputation >= 1.5 Then
+                Else
+                    Log_in.newplayer.setreputation(0.1)
+                    Log_in.newplayer.setcustomers(Log_in.newplayer.getcustomers * 0.1)
+                End If
+            Else
+                If Log_in.newplayer.getreputation <= 0.5 Then
+                ElseIf Log_in.newplayer.getweatherMultiplier = 1 Then
+                    Log_in.newplayer.setreputation(-0.1)
+                    Log_in.newplayer.setcustomers(Log_in.newplayer.getcustomers * -0.1)
+                End If
+            End If
 
 
 
 
+            Form1.Label3.Text = Log_in.newplayer.getreputation
+            Form1.Label6.Text = Log_in.newplayer.getcustomers
 
-
-
-
+            getstar()
 
 
             setweather()
+            Me.Hide()
+            Form1.Show()
         Else
             MsgBox("Error. Not enough ingridients")
         End If
+        'Catch ex As Exception
+        'MsgBox("Check your ingredients")
+        'End Try
     End Sub
+
+
+    Sub getsales()
+        Dim num As New Random
+        Log_in.newplayer.setvarience(num.Next(-10, 10))
+        MsgBox(Log_in.newplayer.getvarience.ToString)
+        Log_in.newplayer.setdeviation(Log_in.newplayer.getvarience * Log_in.newplayer.getreputation) 'If this works i'll be so proud of myself
+        MsgBox(Log_in.newplayer.getdeviation.ToString)
+        Log_in.newplayer.setcustomers(Log_in.newplayer.getdeviation)
+        ' MsgBox(Log_in.newplayer.getcustomers.ToString)
+
+        If Log_in.newplayer.getcustomers <= CInt(TextBox4.Text) Then
+            Log_in.newplayer.setactualsales(Log_in.newplayer.getcustomers)
+        Else
+            Log_in.newplayer.setactualsales(CInt(TextBox4.Text))
+        End If
+    End Sub
+
+
     Sub setweather()
         Randomize()
 
@@ -145,6 +197,33 @@
         End If
     End Sub
 
+    Public Sub Getstar()
 
+        If Log_in.newplayer.getreputation > 0.6 Then
+            Form1.PictureBox7.ImageLocation = "U:\Pictures\Star.Png"
+            If Log_in.newplayer.getreputation > 0.8 Then
+                Form1.PictureBox8.ImageLocation = "U:\Pictures\Star.Png"
+                If Log_in.newplayer.getreputation > 1 Then
+                    Form1.PictureBox9.ImageLocation = "U:\Pictures\Star.Png"
+                    If Log_in.newplayer.getreputation > 1.2 Then
+                        Form1.PictureBox10.ImageLocation = "U:\Pictures\Star.Png"
+                        If Log_in.newplayer.getreputation > 1.4 Then
+                            Form1.PictureBox11.ImageLocation = "U:\Pictures\Star.Png"
+                        Else
+                            Form1.PictureBox11.ImageLocation = Nothing
+                        End If
+                    Else
+                        Form1.PictureBox10.ImageLocation = Nothing
+                    End If
+                Else
+                    Form1.PictureBox9.ImageLocation = Nothing
+                End If
+            Else
+                Form1.PictureBox8.ImageLocation = Nothing
+            End If
+        Else
+            Form1.PictureBox7.ImageLocation = Nothing
+        End If
+    End Sub
 
 End Class

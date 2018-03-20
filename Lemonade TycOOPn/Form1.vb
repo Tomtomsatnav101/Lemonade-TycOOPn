@@ -144,7 +144,7 @@ Public Class player
             ice = 0
             Form1.Label12.Text = 0
             profit = 0
-            totalsales = 0
+            totalsales = 1
             customers = 0
             Form1.Label2.Text = 1000
             money = 1000
@@ -232,7 +232,7 @@ Public Class player
         Return varience
     End Function
     Function setdeviation(adddeviation As Integer)
-        varience = adddeviation
+        deviation = adddeviation
     End Function
     Function getdeviation()
         Return deviation

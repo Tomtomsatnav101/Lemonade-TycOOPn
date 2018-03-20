@@ -18,8 +18,12 @@
 
                     newplayer.setmoney(Database.database(i).money)              'Form1.Label2.Text = Database.database(i).money.ToString
 
+                    'newplayer.settotalsales(Database.database(i).totalsales)     ' Not what i want******** newplayer.totalsales = Database.database(i).customers
+
+
+
                     Form1.Label12.Text = Database.database(i).profit.ToString
-                    newplayer.totalsales = Database.database(i).customers
+
                     Form1.Label3.Text = Database.database(i).reputation.ToString
                     Form1.Label6.Text = Database.database(i).expected.ToString
 
