@@ -50,8 +50,8 @@
 
 
 
-            Getsales()
-            '    MsgBox(Log_in.newplayer.getactualsales.ToString)
+            getsales()
+
 
             Log_in.newplayer.setlemons(-1 * Log_in.newplayer.getactualsales * CInt(TextBox1.Text))
             Log_in.newplayer.setsugar(-1 * Log_in.newplayer.getactualsales * CInt(TextBox2.Text))
@@ -96,19 +96,28 @@
             End If
 
 
-            Log_in.newplayer.setmoneybefore(Log_in.newplayer.getmoney)
 
+            ' MsgBox(Log_in.newplayer.getmoneybefore.ToString)
 
             Log_in.newplayer.setprofit(((CInt(TextBox1.Text) + CInt(TextBox2.Text) + CInt(TextBox3.Text)) * Log_in.newplayer.getactualsales) * Log_in.newplayer.getweatherMultiplier * Log_in.newplayer.getsalesMultiplier * Log_in.newplayer.getupgradeMultiplier)
 
-            Log_in.newplayer.setmoneyafter(Log_in.newplayer.getmoneybefore + Log_in.newplayer.getprofit)
+            Log_in.newplayer.setmoney(Log_in.newplayer.getprofit)
+
+            'Log_in.newplayer.setmoneyafter(Log_in.newplayer.getmoney)
 
 
+            ' Form1.Label12.Text = (Log_in.newplayer.getmoneyafter - Log_in.newplayer.getmoneybefore)
 
-            If Log_in.newplayer.getprofit < 0 Then
+
+            Log_in.newplayer.setmoneyafter(Log_in.newplayer.getmoney)
+
+            Dim tempprofit As Integer = Log_in.newplayer.getmoneyafter - Log_in.newplayer.getmoneybefore
+            Form1.Label12.Text = tempprofit.ToString
+
+            If tempprofit < 0 Then
                 Form1.PictureBox5.ImageLocation = "U:\Pictures\redprofit.png"
                 Form1.Label12.ForeColor = Color.Red
-            ElseIf log_in.newplayer.getprofit > -1 Then
+            ElseIf tempprofit > -1 Then
                 Form1.PictureBox5.ImageLocation = "U:\Pictures\profit.png"
                 Form1.Label12.ForeColor = Color.Green
             Else
@@ -152,7 +161,7 @@
 
             getstar()
 
-
+            Log_in.newplayer.setmoneybefore(Log_in.newplayer.getmoney)
             setweather()
             Me.Hide()
             Form1.Show()
@@ -168,11 +177,11 @@
     Sub getsales()
         Dim num As New Random
         Log_in.newplayer.setvarience(num.Next(-10, 10))
-        MsgBox(Log_in.newplayer.getvarience.ToString)
+
         Log_in.newplayer.setdeviation(Log_in.newplayer.getvarience * Log_in.newplayer.getreputation) 'If this works i'll be so proud of myself
-        MsgBox(Log_in.newplayer.getdeviation.ToString)
+
         Log_in.newplayer.setcustomers(Log_in.newplayer.getdeviation)
-        ' MsgBox(Log_in.newplayer.getcustomers.ToString)
+
 
         If Log_in.newplayer.getcustomers <= CInt(TextBox4.Text) Then
             Log_in.newplayer.setactualsales(Log_in.newplayer.getcustomers)

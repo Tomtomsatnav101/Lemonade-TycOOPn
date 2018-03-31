@@ -90,7 +90,11 @@
         Else
 
         End If
+
+        ' Log_in.newplayer.setmoneybefore(Log_in.newplayer.getmoney)
     End Sub
+
+
 End Class
 
 
@@ -145,7 +149,7 @@ Public Class player
             Form1.Label12.Text = 0
             profit = 0
             totalsales = 1
-            customers = 0
+            customers = 100
             Form1.Label2.Text = 1000
             money = 1000
             Form1.Label3.Text = 0.5
@@ -154,6 +158,7 @@ Public Class player
             expected = 100                      'Database.database(Database.usercount).
             Number = usercount
             upgradeMultiplier = 1
+            moneybefore = 1000
             Log_in.Hide()
             Form1.Show()
 
@@ -208,6 +213,7 @@ Public Class player
     End Function
     Function setprofit(addprofit As Double)
         profit = addprofit
+        Form1.Label12.Text = Math.Round(addprofit).ToString
     End Function
 
     Function getmoneybefore()
