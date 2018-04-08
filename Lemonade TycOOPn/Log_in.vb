@@ -1,68 +1,67 @@
 ﻿Public Class Log_in
     Public newplayer As player
-    Public taken As Boolean
+    Public taken As Boolean = False
     Public number As Integer
+    Public first As Boolean
+    Public correct As Boolean
+    Public aitrue As Boolean
+    Public newaiplayer As AIPlayer
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         If TextBox1.Text = "" Or TextBox2.Text = "" Then
         Else
-            For i As Integer = 1 To Database.usercount
+            For i As Integer = 0 To Database.usercount
                 If Database.database(i).username = TextBox1.Text And Database.database(i).password = TextBox2.Text Then
+                    taken = Nothing
+                    first = False
+                    number = i
                     newplayer = New humanPlayer
-
-                    newplayer.setlemons(Database.database(i).lemons)            'Form1.Label4.Text = Database.database(i).lemons.ToString
-
-                    newplayer.setsugar(Database.database(i).sugar)              'Form1.Label5.Text = Database.database(i).sugar.ToString
-
-                    newplayer.setice(Database.database(i).ice)                  'Form1.Label7.Text = Database.database(i).ice.ToString
-
-                    newplayer.setmoney(Database.database(i).money)              'Form1.Label2.Text = Database.database(i).money.ToString
-
-                    'newplayer.settotalsales(Database.database(i).totalsales)     ' Not what i want******** newplayer.totalsales = Database.database(i).customers
-
-
-
-                    Form1.Label12.Text = Database.database(i).profit.ToString
-
-                    Form1.Label3.Text = Database.database(i).reputation.ToString
-                    Form1.Label6.Text = Database.database(i).expected.ToString
-
-
+                    aitrue = True
+                    newaiplayer = New AIPlayer
                     Me.Hide()
                     Form1.Show()
-                    number = i
 
+                    correct = 1
                 Else
                 End If
             Next
+            If correct = 0 Then
+                MsgBox("Incorrect username or password")
+            End If
         End If
 
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If TextBox1.Text = "" Or TextBox2.Text = "" Then
-        Else
 
-            taken = False
-            For i As Integer = 1 To Database.usercount
+        Else
+            taken = 0
+            For i As Integer = 0 To Database.usercount
                 If TextBox1.Text = Database.database(i).username Then      'Checks to see if username is taken already
                     taken = 1
                 End If
             Next
 
-
-
-
-            'If taken = 0 Then
-            '    Dim newplayer As player = New player
-            '    Me.Hide()
-            '    Form1.Show()
-            'Else
-            '    MsgBox("Username is taken")
-            'End If
-            Database.usercount += 1
-            newplayer = New humanPlayer
+            If taken = 0 Then
+                Database.usercount += 1
+                number = Database.usercount
+                first = True
+                aitrue = False
+                newplayer = New humanPlayer
+                Database.database(Database.usercount).username = TextBox1.Text
+                Database.database(Database.usercount).password = TextBox2.Text
+                Database.database(Database.usercount).ID = number
+            Else
+                MsgBox("Username is taken")
+            End If
         End If
+    End Sub
+    Private Sub Log_in_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Database.read()
+    End Sub
+    Private Sub Log_in_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        End
     End Sub
 
 End Class

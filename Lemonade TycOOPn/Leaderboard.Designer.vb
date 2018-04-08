@@ -37,7 +37,7 @@ Partial Class Leaderboard
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.ItemHeight = 16
         Me.ListBox1.Location = New System.Drawing.Point(81, 86)
-        Me.ListBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ListBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(252, 420)
         Me.ListBox1.TabIndex = 0
@@ -45,7 +45,7 @@ Partial Class Leaderboard
         'Button1
         '
         Me.Button1.Location = New System.Drawing.Point(116, 20)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(188, 59)
         Me.Button1.TabIndex = 1
@@ -55,7 +55,7 @@ Partial Class Leaderboard
         'Button2
         '
         Me.Button2.Location = New System.Drawing.Point(143, 523)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(4)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(109, 54)
         Me.Button2.TabIndex = 2
@@ -80,7 +80,7 @@ Partial Class Leaderboard
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.ListBox1)
         Me.Panel1.Location = New System.Drawing.Point(-1, 108)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(425, 594)
         Me.Panel1.TabIndex = 4
@@ -90,7 +90,7 @@ Partial Class Leaderboard
         Me.Panel2.BackColor = System.Drawing.Color.Aqua
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Location = New System.Drawing.Point(-1, -1)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(425, 89)
         Me.Panel2.TabIndex = 5
@@ -103,7 +103,7 @@ Partial Class Leaderboard
         Me.ClientSize = New System.Drawing.Size(420, 693)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MaximizeBox = False
         Me.Name = "Leaderboard"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
