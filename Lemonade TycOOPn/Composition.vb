@@ -82,22 +82,21 @@
 
             Log_in.newplayer.calculate(tempsales, templemon, tempsugar, tempice)
 
-            If Log_in.newplayer.getaicounter = 2 Then
+            If Log_in.newplayer.getaicounter = 0 Then
                 Log_in.taken = 0
                 Log_in.aitrue = True
                 aifirst = 1
                 Log_in.newaiplayer = New AIPlayer
                 Log_in.newplayer.setaicounter(1)
                 MsgBox("A new lemmonade stand has set up in your area")
-            ElseIf Log_in.newplayer.getaicounter < 2 Then
+            ElseIf Log_in.newplayer.getaicounter < 0 Then
                 Log_in.newplayer.setaicounter(1)
-            ElseIf Log_in.newplayer.getaicounter > 2 Then
-                MsgBox("TEST")
+            ElseIf Log_in.newplayer.getaicounter > 0 Then
                 Log_in.newaiplayer.calculate(tempsales, templemon, tempsugar, tempice)
             End If
 
 
-            'setweather()
+            Log_in.newplayer.setweather()
 
 
 

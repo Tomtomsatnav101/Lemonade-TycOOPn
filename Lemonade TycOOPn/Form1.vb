@@ -166,40 +166,49 @@
         PictureBox6.ImageLocation = "U:\Pictures\meh.png"
         MsgBox("Meh")
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        weather = 0
+        MsgBox("sun")
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        weather = 1
+        MsgBox("Cold")
+    End Sub
 End Class
 
 
 
 Public Class player
 
-    Private lemons As Integer
-    Private ice As Integer
-    Private sugar As Integer
+    Protected lemons As Integer
+    Protected ice As Integer
+    Protected sugar As Integer
 
-    Private reputation As Double
-    'Private progress As Double
-    Private varience As Integer
-    Private actualsales As Integer
-    Private deviation As Double
+    Protected reputation As Double
+    Protected varience As Integer
+    Protected actualsales As Integer
+    Protected deviation As Double
 
-    Private ideallemon As Double
-    Private idealice As Double
-    Private idealsugar As Double
-    Private compositions(2) As Double
+    Protected ideallemon As Double
+    Protected idealice As Double
+    Protected idealsugar As Double
+    Protected compositions(2) As Double
 
 
-    Private profit As Integer
-    Private moneybefore As Integer
-    Private moneyafter As Integer
-    Private totalsales As Integer
-    Private money As Integer
-    Private expected As Integer
+    Protected profit As Integer
+    Protected moneybefore As Integer
+    Protected moneyafter As Integer
+    Protected totalsales As Integer
+    Protected money As Integer
+    Protected expected As Integer
 
-    Private upgradeMultiplier As Integer
-    Private weatherMultiplier As Integer
-    Private salesMultiplier As Double
+    Protected upgradeMultiplier As Integer
+    Protected weatherMultiplier As Integer
+    Protected salesMultiplier As Double
 
-    Private aicounter As Integer
+    Protected aicounter As Integer
 
 
     Private Number As Integer 'Ordinal number of the player in the database
@@ -344,11 +353,11 @@ Public Class player
     Function setaicounter(addaicounter As Integer)
         aicounter += addaicounter
     End Function
-
+    ''''''
     Function getmoney()
         Return money
     End Function
-    Function setmoney(addmoney As Integer)
+    Overridable Function setmoney(addmoney As Integer)
         money += addmoney
         Form1.Label2.Text = Log_in.newplayer.getmoney()
     End Function
@@ -356,7 +365,7 @@ Public Class player
     Function getlemons()
         Return lemons
     End Function
-    Function setlemons(addlemons As Integer)
+    Overridable Function setlemons(addlemons As Integer)
         lemons += addlemons
         Form1.Label4.Text = Log_in.newplayer.getlemons()
 
@@ -365,7 +374,7 @@ Public Class player
     Function getice()
         Return ice
     End Function
-    Function setice(addice As Integer)
+    Overridable Function setice(addice As Integer)
         ice += addice
         Form1.Label7.Text = Log_in.newplayer.getice()
     End Function
@@ -373,7 +382,7 @@ Public Class player
     Function getsugar()
         Return sugar
     End Function
-    Function setsugar(addsugar As Integer)
+    Overridable Function setsugar(addsugar As Integer)
         sugar += addsugar
         Form1.Label5.Text = Log_in.newplayer.getsugar()
     End Function
@@ -381,7 +390,7 @@ Public Class player
     Function getreputation()
         Return reputation
     End Function
-    Function setreputation(addreputation As Double)
+    Overridable Function setreputation(addreputation As Double)
         reputation += addreputation
         Form1.Label3.Text = Log_in.newplayer.getreputation()
     End Function
@@ -389,11 +398,11 @@ Public Class player
     Function getprofit()
         Return profit
     End Function
-    Function setprofit(addprofit As Double)
+    Overridable Function setprofit(addprofit As Double)
         profit = addprofit
         Form1.Label12.Text = Math.Round(addprofit).ToString
     End Function
-
+    ''''''
     Function getmoneybefore()
         Return moneybefore
     End Function
@@ -492,14 +501,14 @@ Public Class player
         totalsales += addtotalsales
     End Function
 
-    Sub getsales(tempsales As Integer)
+    Overridable Sub getsales(tempsales As Integer)
 
         Dim num As New Random
         varience = (num.Next(-10, 10))
 
         deviation = (varience * reputation)
 
-        Log_in.newplayer.setexpected(Log_in.newplayer.getdeviation)
+        expected += deviation
 
 
 
@@ -510,7 +519,7 @@ Public Class player
         End If
     End Sub
 
-    Sub getweather(templemon As Integer, tempsugar As Integer, tempice As Integer)
+    Overridable Sub getweather(templemon As Integer, tempsugar As Integer, tempice As Integer)
         lemons -= actualsales * templemon
         sugar -= actualsales * tempsugar
         ice -= actualsales * tempice
@@ -549,21 +558,24 @@ Public Class player
         'COLD 1 lemon, 1 ice, 2 sugar
     End Sub
 
-    Sub getprogress()
+    Overridable Sub getprogress()
 
-        salesMultiplier = ((Math.Log10(Log_in.newplayer.gettotalsales)) / 100) + 1
-
-        If Math.Log10(totalsales) >= 5 Then
-            Composition.ProgressBar1.Value = 5
-        Else
-            Composition.ProgressBar1.Value = Math.Log10(totalsales)
-        End If
+        salesMultiplier = ((Math.Log10(totalsales)) / 100) + 1
+        Try
+            If Math.Log10(totalsales) >= 5 Then
+                Composition.ProgressBar1.Value = 5
+            Else
+                Composition.ProgressBar1.Value = Math.Log10(totalsales)
+            End If
+        Catch ex As exception
+        End Try
 
     End Sub
-    Sub getprofits(templemon As Integer, tempsugar As Integer, tempice As Integer)
+
+    Overridable Sub getprofits(templemon As Integer, tempsugar As Integer, tempice As Integer)
 
         Dim smallprofit As Integer
-        Dim bigprofit As Integer
+        Dim bigprofit As Double
 
         bigprofit = (((templemon + tempsugar + tempice) * actualsales) * salesMultiplier)
         smallprofit = bigprofit - ((templemon + tempsugar + tempice) * actualsales)
@@ -588,7 +600,8 @@ Public Class player
             Form1.Label12.ForeColor = Color.Black
         End If
     End Sub
-    Sub getreputations()
+
+    Overridable Sub getreputations()
         If actualsales = expected Then
 
             If reputation >= 1.5 Then
@@ -624,7 +637,7 @@ Public Class player
         moneybefore = money
     End Sub
 
-    Public Sub Getstar()
+    Sub Getstar()
 
         If reputation > 0.6 Then
             Form1.PictureBox7.ImageLocation = "U:\Pictures\Star.Png"
@@ -671,18 +684,14 @@ Public Class player
         End If
     End Sub
 
-    Overridable Sub Learn(tempsales As Integer, templemon As Integer, tempsugar As Integer, tempice As Integer, weather As Integer)
-
-    End Sub
 
     Overridable Sub calculate(tempsales As Integer, templemon As Integer, tempsugar As Integer, tempice As Integer)
-        Log_in.newplayer.getsales(tempsales)
-        Log_in.newplayer.getweather(templemon, tempsugar, tempice)
-        Log_in.newplayer.getprogress()
-        Log_in.newplayer.getprofits(templemon, tempsugar, tempice)
-        Log_in.newplayer.getreputations()
-        Log_in.newplayer.Getstar()
-        setweather()
+        getsales(tempsales)
+        getweather(templemon, tempsugar, tempice)
+        getprogress()
+        getprofits(templemon, tempsugar, tempice)
+        getreputations()
+        Getstar()
 
     End Sub
 
@@ -690,36 +699,230 @@ End Class
 
 Public Class humanPlayer
     Inherits player
-
 End Class
 
 Public Class AIPlayer
     Inherits player
-    Private trial(4, 100) As Integer      'lemon | Sugar | Ice | Weather | weatherMultiplier
+    Private trial(4, 1002) As Integer      'lemon | Sugar | Ice | Weather | weatherMultiplier
     Private trialcounter As Integer = 0
-    Overrides Sub Learn(tempsales As Integer, templemon As Integer, tempsugar As Integer, tempice As Integer, weather As Integer)
+
+    Overrides Function setmoney(addmoney As Integer)
+        money += addmoney
+    End Function
+    Overrides Function setlemons(addlemons As Integer)
+        lemons += addlemons
+    End Function
+    Overrides Function setsugar(addsugar As Integer)
+        sugar += addsugar
+    End Function
+    Overrides Function setice(addice As Integer)
+        ice += addice
+    End Function
+    Overrides Function setreputation(addreputation As Double)
+        reputation += addreputation
+    End Function
+    Overrides Function setprofit(addprofit As Double)
+        profit = addprofit
+    End Function
+
+    'Sub Learn() 'tempsales As Integer, templemon As Integer, tempsugar As Integer, tempice As Integer, weather As Integer)
 
 
-        For i As Integer = 0 To trialcounter
-            If trial(3, i) = weather Then
-                For j As Integer = 0 To 2
-                    MsgBox(trial(j, i).ToString)
-                Next
-            End If
-        Next
-
-        trial(0, trialcounter) = templemon
-        trial(1, trialcounter) = tempsugar
-        trial(2, trialcounter) = tempice
-        trial(3, trialcounter) = weather
+    '    For i As Integer = 0 To trialcounter
+    '        If trial(3, i) = Form1.weather Then
+    '            For j As Integer = 0 To 2
+    '                MsgBox(trial(j, i).ToString)
+    '            Next
+    '        End If
+    '    Next
 
 
-    End Sub
+
+
+    'End Sub
 
 
 
 
     Overrides Sub calculate(tempsales As Integer, templemon As Integer, tempsugar As Integer, tempice As Integer)
-        MsgBox("test")
+
+        getsales(tempsales)
+        getweather(trial(0, trialcounter), trial(1, trialcounter), trial(2, trialcounter))
+        getprogress()
+        getprofits(trial(0, trialcounter), trial(1, trialcounter), trial(2, trialcounter))
+        getreputations()
+
+
+        'For i As Integer = 0 To trialcounter - 1
+        '    For j As Integer = 0 To 4
+        '        MsgBox("trial(" + j.ToString + "," + i.ToString + ") = " + trial(j, i).ToString)
+        '    Next
+
+        'Next
+        trialcounter += 1
     End Sub
+
+    Overrides Sub getsales(tempsales As Integer)
+        Dim num As New Random
+        varience = (num.Next(-10, 10))
+
+        deviation = (varience * reputation)
+
+        expected += deviation
+
+        actualsales = expected
+
+        'This is where it looks at the weather and sees if it either has the best combination, and a multiple of it, or just randomly tries again
+        Dim found As Boolean = 0
+
+
+        For i As Integer = 1 To 10
+            For j As Integer = 0 To trialcounter - 1
+                If trial(0, j) Mod i = 0 And trial(1, j) Mod i = 0 And trial(2, j) Mod i = 0 Then           'Cancels out common factors
+                    trial(0, j) = (trial(0, j) / i)
+                    trial(1, j) = (trial(1, j) / i)
+                    trial(2, j) = (trial(2, j) / i)
+                End If
+            Next
+        Next
+
+
+        found = 0
+        For i As Integer = 0 To trialcounter - 1
+            If trial(3, i) = Form1.weather And trial(4, i) = 2 Then
+                trial(0, trialcounter) = trial(0, i)                    'Checks to see if a solution that gets the multiplier has been discovered
+                trial(1, trialcounter) = trial(1, i)
+                trial(2, trialcounter) = trial(2, i)
+                found = 1
+                MsgBox("found = " + found.ToString)
+                MsgBox("Ideal for " + Form1.weather.ToString + "=" + trial(0, i).ToString + " " + trial(1, i).ToString + " " + trial(2, i).ToString)
+            End If
+        Next
+
+
+        If found = 1 Then
+            money = money - actualsales * (trial(0, trialcounter) + trial(1, trialcounter) + trial(2, trialcounter))
+        ElseIf found = 0 Then
+
+
+            Do
+                Randomize()
+                trial(0, trialcounter) = CInt(Math.Ceiling(Rnd() * 4))
+                Randomize()
+                trial(1, trialcounter) = CInt(Math.Ceiling(Rnd() * 4))                                                                'Randomly generates composition if optimal one hasnt been discovered yet
+                Randomize()
+                trial(2, trialcounter) = CInt(Math.Ceiling(Rnd() * 4))
+
+                If actualsales * (trial(0, trialcounter) + trial(1, trialcounter) + trial(2, trialcounter)) > money Then
+                Else
+                    money = money - actualsales * (trial(0, trialcounter) + trial(1, trialcounter) + trial(2, trialcounter))
+                    MsgBox("test.,,,,,,,")
+                    MsgBox("found = " + found.ToString)
+                    Exit Do
+                End If
+            Loop
+        Else
+        End If
+    End Sub
+
+    Overrides Sub getweather(templemon As Integer, tempsugar As Integer, tempice As Integer)
+        lemons -= actualsales * templemon
+        sugar -= actualsales * tempsugar
+        ice -= actualsales * tempice
+        compositions(0) = templemon
+        compositions(1) = tempsugar
+        compositions(2) = tempice
+
+        ideallemon = compositions(0) / (compositions(0) + compositions(1) + compositions(2))
+        idealsugar = compositions(1) / (compositions(0) + compositions(1) + compositions(2))
+        idealice = compositions(2) / (compositions(0) + compositions(1) + compositions(2))
+
+        If Form1.weather = 2 And ideallemon = idealsugar And idealsugar = idealice Then
+            weatherMultiplier = 2
+            MsgBox(" AI  ***** MEHHY ")
+        ElseIf Form1.weather = 0 And ideallemon = 2 * idealsugar And idealice = 3 * idealsugar Then
+            weatherMultiplier = 2
+            MsgBox("AI        ***********SUNNY")
+        ElseIf Form1.weather = 1 And ideallemon = idealice And idealsugar = 2 * idealice Then
+            weatherMultiplier = 2
+            MsgBox("AI   *****COLD")
+        Else
+            weatherMultiplier = 1
+            MsgBox("FAIL = " + trial(0, trialcounter).ToString + trial(1, trialcounter).ToString + trial(2, trialcounter).ToString)
+        End If
+
+        totalsales += actualsales
+        trial(3, trialcounter) = Form1.weather
+        trial(4, trialcounter) = weatherMultiplier
+
+        'MEH 1 lemon, 1 ice, 1 sugar
+
+        'SUNNY 2 lemon, 3 ice, 1 sugar
+
+        'COLD 1 lemon, 1 ice, 2 sugar
+
+        If weatherMultiplier = 2 Then
+            MsgBox("composition = " + trial(0, trialcounter).ToString + trial(1, trialcounter).ToString + trial(2, trialcounter).ToString + "weather = " + Form1.weather.ToString)
+        End If
+
+
+
+    End Sub
+
+    Overrides Sub getprogress()
+        salesMultiplier = ((Math.Log10(totalsales)) / 100) + 1
+    End Sub
+
+    Overridable Sub getprofits(templemon As Integer, tempsugar As Integer, tempice As Integer)
+
+        Dim smallprofit As Integer
+        Dim bigprofit As Integer
+
+        bigprofit = (((templemon + tempsugar + tempice) * actualsales) * salesMultiplier)
+        smallprofit = bigprofit - ((templemon + tempsugar + tempice) * actualsales)
+
+        money += (bigprofit + (weatherMultiplier - 1) * smallprofit)
+
+        moneyafter = money
+        'MsgBox("expected = " + expected.ToString)
+        'MsgBox("bigprofit = " + bigprofit.ToString)
+        'MsgBox("smallprofit = " + smallprofit.ToString)
+        'MsgBox("money = " + money.ToString)
+        profit = moneyafter - moneybefore
+
+    End Sub
+
+    Overrides Sub getreputations()
+        If actualsales = expected Then
+
+            If reputation >= 1.5 Then
+            Else
+                reputation += 0.1
+                expected += expected * 0.1
+            End If
+        Else
+            If reputation <= 0.5 Then
+            Else
+                reputation -= 0.1
+                expected -= expected * 0.1
+            End If
+        End If
+
+        If weatherMultiplier = 2 Then
+            If reputation >= 1.5 Then
+            Else
+                reputation += 0.1
+                expected += expected * 0.1
+            End If
+        Else
+            If reputation <= 0.5 Then
+            ElseIf weatherMultiplier = 1 Then
+                reputation -= 0.1
+                expected -= expected * 0.1
+            End If
+        End If
+
+        moneybefore = money
+    End Sub
+
 End Class
