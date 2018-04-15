@@ -53,63 +53,66 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        ' Try
-        If CInt(TextBox1.Text) * CInt(TextBox4.Text) <= Log_in.newplayer.getlemons Or CInt(TextBox2.Text) * CInt(TextBox4.Text) <= Log_in.newplayer.getsugar Or CInt(TextBox3.Text) * CInt(TextBox4.Text) <= Log_in.newplayer.getice Then
+        Try
 
-            Dim tempsales As Integer = CInt(TextBox4.Text)
-            Dim templemon As Integer = TextBox1.Text
-            Dim tempsugar As Integer = TextBox2.Text
-            Dim tempice As Integer = TextBox3.Text
+            If ((CInt(TextBox1.Text) * CInt(TextBox4.Text)) <= Log_in.newplayer.getlemons) And (CInt(TextBox2.Text) * CInt(TextBox4.Text) <= Log_in.newplayer.getsugar) And (CInt(TextBox3.Text) * CInt(TextBox4.Text) <= Log_in.newplayer.getice) Then
 
 
 
-            'Log_in.newplayer.getsales(tempsales)
-            ' Log_in.newaiplayer.learn(tempsales, templemon, tempsugar, tempice, Form1.weather)
-            'Log_in.newplayer.getweather(templemon, tempsugar, tempice)
+                Dim tempsales As Integer = CInt(TextBox4.Text)
+                Dim templemon As Integer = TextBox1.Text
+                Dim tempsugar As Integer = TextBox2.Text
+                Dim tempice As Integer = TextBox3.Text
 
 
-            'Log_in.newplayer.settotalsales(Log_in.newplayer.getactualsales)
 
-            'Log_in.newplayer.getprogress()
+                'Log_in.newplayer.getsales(tempsales)
+                ' Log_in.newaiplayer.learn(tempsales, templemon, tempsugar, tempice, Form1.weather)
+                'Log_in.newplayer.getweather(templemon, tempsugar, tempice)
 
-            'Log_in.newplayer.getprofits(templemon, tempsugar, tempice)
 
-            'Log_in.newplayer.getreputations()
+                'Log_in.newplayer.settotalsales(Log_in.newplayer.getactualsales)
 
-            'Log_in.newplayer.getstar()
+                'Log_in.newplayer.getprogress()
 
-            'Log_in.newplayer.setmoneybefore(Log_in.newplayer.getmoney)
+                'Log_in.newplayer.getprofits(templemon, tempsugar, tempice)
 
-            Log_in.newplayer.calculate(tempsales, templemon, tempsugar, tempice)
+                'Log_in.newplayer.getreputations()
 
-            If Log_in.newplayer.getaicounter = 0 Then
-                Log_in.taken = 0
-                Log_in.aitrue = True
-                aifirst = 1
-                Log_in.newaiplayer = New AIPlayer
-                Log_in.newplayer.setaicounter(1)
-                MsgBox("A new lemmonade stand has set up in your area")
-            ElseIf Log_in.newplayer.getaicounter < 0 Then
-                Log_in.newplayer.setaicounter(1)
-            ElseIf Log_in.newplayer.getaicounter > 0 Then
-                Log_in.newaiplayer.calculate(tempsales, templemon, tempsugar, tempice)
+                'Log_in.newplayer.getstar()
+
+                'Log_in.newplayer.setmoneybefore(Log_in.newplayer.getmoney)
+
+                Log_in.newplayer.calculate(tempsales, templemon, tempsugar, tempice)
+
+                If Log_in.newplayer.getaicounter = 0 Then
+                    Log_in.taken = 0
+                    Log_in.aitrue = True
+                    aifirst = 1
+                    Log_in.newaiplayer = New AIPlayer
+                    Log_in.newplayer.setaicounter(1)
+                    MsgBox("A new lemmonade stand has set up in your area")
+                ElseIf Log_in.newplayer.getaicounter < 0 Then
+                    Log_in.newplayer.setaicounter(1)
+                ElseIf Log_in.newplayer.getaicounter > 0 Then
+                    Log_in.newaiplayer.calculate(tempsales, templemon, tempsugar, tempice)
+                End If
+
+
+                Log_in.newplayer.setweather()
+
+
+
+
+                Me.Hide()
+                Form1.Show()
+
+            Else
+                MsgBox("Error. Not enough ingridients")
             End If
-
-
-            Log_in.newplayer.setweather()
-
-
-
-
-            Me.Hide()
-            Form1.Show()
-
-        Else
-            MsgBox("Error. Not enough ingridients")
-        End If
-        'Catch ex As Exception
-        '    MsgBox("Check your ingredients")
-        ' End Try
+        Catch ex As Exception
+            MsgBox("Check your ingredients")
+        End Try
     End Sub
 
 

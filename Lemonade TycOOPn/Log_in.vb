@@ -9,6 +9,7 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         If TextBox1.Text = "" Or TextBox2.Text = "" Then
+            MsgBox("Please enter both a username and a password")
         Else
             For i As Integer = 0 To Database.usercount
                 If Database.database(i).username = TextBox1.Text And Database.database(i).password = TextBox2.Text Then
@@ -34,7 +35,7 @@
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If TextBox1.Text = "" Or TextBox2.Text = "" Then
-
+            MsgBox("Please enter both a username and a password")
         Else
             taken = 0
             For i As Integer = 0 To Database.usercount

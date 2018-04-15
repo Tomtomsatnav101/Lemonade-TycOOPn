@@ -51,6 +51,7 @@ Partial Class Form1
         Me.Button24 = New System.Windows.Forms.Button()
         Me.Button25 = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.PictureBox11 = New System.Windows.Forms.PictureBox()
@@ -60,7 +61,6 @@ Partial Class Form1
         Me.PictureBox7 = New System.Windows.Forms.PictureBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -339,7 +339,7 @@ Partial Class Form1
         'HScrollBar1
         '
         Me.HScrollBar1.Location = New System.Drawing.Point(68, 97)
-        Me.HScrollBar1.Maximum = 1000
+        Me.HScrollBar1.Maximum = 1009
         Me.HScrollBar1.Name = "HScrollBar1"
         Me.HScrollBar1.Size = New System.Drawing.Size(539, 81)
         Me.HScrollBar1.TabIndex = 31
@@ -385,6 +385,15 @@ Partial Class Form1
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(645, 311)
         Me.Panel3.TabIndex = 47
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(400, 272)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 23)
+        Me.Button4.TabIndex = 55
+        Me.Button4.Text = "Cold"
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'Button3
         '
@@ -480,15 +489,6 @@ Partial Class Form1
         Me.Button2.TabIndex = 45
         Me.Button2.Text = "Meh"
         Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(400, 272)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 23)
-        Me.Button4.TabIndex = 55
-        Me.Button4.Text = "Cold"
-        Me.Button4.UseVisualStyleBackColor = True
         '
         'Form1
         '

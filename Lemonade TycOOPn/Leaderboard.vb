@@ -276,4 +276,13 @@
         Me.Hide()
         Form1.Show()
     End Sub
+
+    Private Sub Leaderboard_Load(sender As Object, e As EventArgs) Handles Me.Load
+        ListBox1.Items.Clear()
+        order = True
+    End Sub
+    Private Sub Leaderboard_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
+        ListBox1.Items.Clear()
+        order = True
+    End Sub
 End Class

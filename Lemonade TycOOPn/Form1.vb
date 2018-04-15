@@ -9,6 +9,8 @@
                 Log_in.newplayer.setmoney(-lemon)
 
                 Label2.Text = Log_in.newplayer.getmoney()
+            Else
+                MsgBox("Not enough money!")
             End If
         ElseIf addstock = 2 Then
             If Log_in.newplayer.getmoney() >= sugar Then
@@ -16,7 +18,8 @@
                 Log_in.newplayer.setmoney(-sugar)
 
                 Label2.Text = Log_in.newplayer.getmoney()
-
+            Else
+                MsgBox("Not enough money!")
             End If
         ElseIf addstock = 3 Then
             If Log_in.newplayer.getmoney() >= ice Then
@@ -24,6 +27,8 @@
                 Log_in.newplayer.setmoney(-ice)
 
                 Label2.Text = Log_in.newplayer.getmoney()
+            Else
+                MsgBox("Not enough money!")
             End If
         End If
 
