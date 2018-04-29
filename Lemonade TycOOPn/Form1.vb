@@ -1,11 +1,11 @@
 ﻿Public Class Form1
-    Dim addstock As Integer
-    Public weather As Integer
+    Dim addstock As Integer     'Saves which stock will be added, so that the same sub can be 0
+    Public weather As Integer   'The weather needs to be accessed in the composition form
 
     Private Sub GetStock(lemon, sugar, ice)
         If addstock = 1 Then
             If Log_in.newplayer.getmoney() >= lemon Then
-                Log_in.newplayer.setlemons(lemon)
+                Log_in.newplayer.setlemons(lemon)           'if the player has enough money, add the value scroll bar to their total stock, and take it away from their money
                 Log_in.newplayer.setmoney(-lemon)
 
                 Label2.Text = Log_in.newplayer.getmoney()
@@ -38,7 +38,7 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         addstock = 1
-        GetStock(HScrollBar1.Value, 0, 0)
+        GetStock(HScrollBar1.Value, 0, 0)       'Sets the appropriate addstock and add that stock to their reserves
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
@@ -52,13 +52,13 @@
     End Sub
 
     Private Sub HScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles HScrollBar1.Scroll
-        Button1.Text = HScrollBar1.Value.ToString + " Lemons!"
+        Button1.Text = HScrollBar1.Value.ToString + " Lemons!"      'Changes the labels according to thee scroll bar value
         Button6.Text = HScrollBar1.Value.ToString + " Sugar!"
         Button9.Text = HScrollBar1.Value.ToString + " Ice!"
     End Sub
 
     Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
-        Log_in.newplayer.setmoney((CInt(Label4.Text) + CInt(Label5.Text) + CInt(Label7.Text)) * 0.9)
+        Log_in.newplayer.setmoney((CInt(Label4.Text) + CInt(Label5.Text) + CInt(Label7.Text)) * 0.9)        'Calculates the liquidate refund, which is 90% of what they had
         Log_in.newplayer.setlemons(-CInt(Label4.Text))
         Log_in.newplayer.setsugar(-CInt(Label5.Text))
         Log_in.newplayer.setice(-CInt(Label7.Text))
@@ -67,17 +67,17 @@
 
     Private Sub Button21_Click(sender As Object, e As EventArgs) Handles Button21.Click
         Me.Hide()
-        Upgrade.Show()
+        Upgrade.Show()  'Opens upgrade screen
     End Sub
 
     Private Sub Button25_Click(sender As Object, e As EventArgs) Handles Button25.Click
         Me.Hide()
-        Leaderboard.Show()
+        Leaderboard.Show()  'Opens leaderboard screen
     End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         Me.Hide()
-        Composition.Label4.Text = Log_in.newplayer.getlemons()
+        Composition.Label4.Text = Log_in.newplayer.getlemons()              'Opens cmposition screen
         Composition.Label5.Text = Log_in.newplayer.getsugar()
         Composition.Label6.Text = Log_in.newplayer.getice()
         Composition.Show()
@@ -89,7 +89,7 @@
         weather = CInt(Rnd() * 2)
         If weather = 0 Then
             PictureBox6.ImageLocation = "U:\Pictures\sunny.PNG"
-            MsgBox("Sunny")
+            MsgBox("Sunny")                                             'Randomly generates the weather when the form first loads
         ElseIf weather = 1 Then
             PictureBox6.ImageLocation = "U:\Pictures\cold.PNG"
             MsgBox("Cold")
@@ -105,14 +105,14 @@
 
     Private Sub Button24_Click(sender As Object, e As EventArgs) Handles Button24.Click
         Database.database(Log_in.number).money = Log_in.newplayer.getmoney
-        Database.database(Log_in.number).score = Log_in.newplayer.getmoney      'Change to score if have the time
+        Database.database(Log_in.number).score = Log_in.newplayer.getmoney
         Database.database(Log_in.number).totalsales = Log_in.newplayer.gettotalsales
         Database.database(Log_in.number).lemons = Log_in.newplayer.getlemons
         Database.database(Log_in.number).sugar = Log_in.newplayer.getsugar
         Database.database(Log_in.number).ice = Log_in.newplayer.getice
         Database.database(Log_in.number).reputation = Log_in.newplayer.getreputation
         Database.database(Log_in.number).expected = Log_in.newplayer.getexpected
-        Database.database(Log_in.number).upgradeMultiplier = Log_in.newplayer.getupgradeMultiplier
+        Database.database(Log_in.number).upgradeMultiplier = Log_in.newplayer.getupgradeMultiplier              'All of these variables are being written to the database upon closing
 
         Database.database(Log_in.number).ailemons = Log_in.newaiplayer.getlemons
         Database.database(Log_in.number).aisugar = Log_in.newaiplayer.getsugar
@@ -121,11 +121,11 @@
         Database.database(Log_in.number).aimoney = Log_in.newaiplayer.getmoney
         Database.database(Log_in.number).aireputation = Log_in.newaiplayer.getreputation
         Database.database(Log_in.number).aiexpected = Log_in.newaiplayer.getexpected
-        Database.database(Log_in.number).aiscore = Log_in.newaiplayer.getmoney     'Change to score if have the time
+        Database.database(Log_in.number).aiscore = Log_in.newaiplayer.getmoney
         Database.database(Log_in.number).aiupgradeMultiplier = Log_in.newaiplayer.getupgradeMultiplier
         Database.database(Log_in.number).aicounter = Log_in.newplayer.getaicounter
 
-        Database.write()
+        Database.write()                    'Add the users info to the database
 
         End
     End Sub
@@ -187,33 +187,33 @@ End Class
 
 Public Class player
 
-    Protected lemons As Integer
+    Protected lemons As Integer                 'Stock levels
     Protected ice As Integer
     Protected sugar As Integer
 
-    Protected reputation As Double
-    Protected varience As Integer
-    Protected actualsales As Integer
-    Protected deviation As Double
+    Protected reputation As Double          'The number that determines how the users customer base grows
+    Protected varience As Integer           'Represents the random uncontrollable change in customers from day to day
+    Protected actualsales As Integer        'How many sales the user has on a day. Not just how many they plan to have, but how many drinks they actually sell
+    Protected deviation As Double           'varience * reputation - how many customers the day actually differs from planned
 
     Protected ideallemon As Double
-    Protected idealice As Double
+    Protected idealice As Double            'The users ratios of stock in their drinks
     Protected idealsugar As Double
     Protected compositions(2) As Double
 
 
-    Protected profit As Integer
-    Protected moneybefore As Integer
-    Protected moneyafter As Integer
-    Protected totalsales As Integer
-    Protected money As Integer
-    Protected expected As Integer
+    Protected profit As Integer         'How much money the user makes in a day
+    Protected moneybefore As Integer    'How much money the user has before buying stock
+    Protected moneyafter As Integer     'How much money the user has after selling stock
+    Protected totalsales As Integer     'The total number of drinks ever sold
+    Protected money As Integer          'The users money
+    Protected expected As Integer       'How many customers the user if forecast to have, before deviation
 
-    Protected upgradeMultiplier As Integer
-    Protected weatherMultiplier As Integer
-    Protected salesMultiplier As Double
+    Protected upgradeMultiplier As Integer      'The profit boost the user has due to any upgrades they've bought
+    Protected weatherMultiplier As Integer      'The profit boost the user has due to the weather bonus
+    Protected salesMultiplier As Double         'The profit boost the user has due to the users past sales
 
-    Protected aicounter As Integer
+    Protected aicounter As Integer              'How many turns the player has played before the ai appears
 
 
     Private Number As Integer 'Ordinal number of the player in the database
@@ -234,7 +234,7 @@ Public Class player
 
                     Form1.Label5.Text = 0
                     sugar = 0
-                    Database.database(Log_in.number).sugar = 0
+                    Database.database(Log_in.number).sugar = 0              'Sets the humanPlayers stats if it is a new player
 
                     Form1.Label7.Text = 0
                     ice = 0
@@ -280,7 +280,7 @@ Public Class player
                     profit = 0
 
                     totalsales = 1
-                    Database.database(Log_in.number).aitotalsales = 1
+                    Database.database(Log_in.number).aitotalsales = 1           'Sets the aiplayers values if it is a new player
 
                     money = 1000
                     Database.database(Log_in.number).aimoney = 1000
@@ -305,8 +305,8 @@ Public Class player
 
                     totalsales = Database.database(Log_in.number).totalsales
 
-                    Form1.Label4.Text = Database.database(Log_in.number).lemons.ToString
-                    lemons = Database.database(Log_in.number).lemons
+                    Form1.Label4.Text = Database.database(Log_in.number).lemons.ToString                'Sets the humanPlayers values if the player is signing in to an old account
+                    lemons = Database.database(Log_in.number).lemons                                    'This data is read from the relavent database slots
 
                     Form1.Label7.Text = Database.database(Log_in.number).ice
                     ice = Database.database(Log_in.number).ice
@@ -329,7 +329,7 @@ Public Class player
                 Else
                     money = Database.database(Log_in.number).aimoney.ToString
 
-                    totalsales = Database.database(Log_in.number).aitotalsales
+                    totalsales = Database.database(Log_in.number).aitotalsales                  'Sets the aiPlayers values if the player is singing into an old account. This data is read from the database
 
                     lemons = Database.database(Log_in.number).ailemons
 
@@ -349,7 +349,7 @@ Public Class player
                 End If
             End If
         Else
-            MsgBox("Username is taken")
+            MsgBox("Username is taken")                         'If there has been an issue creating a new player because the log-in details weren't correct
         End If
     End Sub
     Function getaicounter()
@@ -358,7 +358,7 @@ Public Class player
     Function setaicounter(addaicounter As Integer)
         aicounter += addaicounter
     End Function
-    ''''''
+
     Function getmoney()
         Return money
     End Function
@@ -509,24 +509,24 @@ Public Class player
     Overridable Sub getsales(tempsales As Integer)
 
         Dim num As New Random
-        varience = (num.Next(-10, 10))
+        varience = (num.Next(-10, 10))              'Randomly generates a number between -10 and 10
 
-        deviation = (varience * reputation)
+        deviation = (varience * reputation)         ' The actual customers can change randomly by a small amount to simulate real life. AS your reputation grows, the maximum deviation increases from 5 to 15
 
         expected += deviation
 
 
 
-        If expected <= tempsales Then
+        If expected <= tempsales Then               'If you have made more lemonade then you can sell with the amount of customers you have, you sell one lemonade to each customer and have surplus
             actualsales = expected
         Else
-            actualsales = tempsales
+            actualsales = tempsales                 'If you have made less lemonade than you can sell, you sell all you made, and cant satisfy demand
         End If
     End Sub
 
     Overridable Sub getweather(templemon As Integer, tempsugar As Integer, tempice As Integer)
         lemons -= actualsales * templemon
-        sugar -= actualsales * tempsugar
+        sugar -= actualsales * tempsugar                'Removes stock in the relavent amounts
         ice -= actualsales * tempice
 
         compositions(0) = templemon
@@ -534,25 +534,25 @@ Public Class player
         compositions(2) = tempice
 
         ideallemon = compositions(0) / (compositions(0) + compositions(1) + compositions(2))
-        idealsugar = compositions(1) / (compositions(0) + compositions(1) + compositions(2))
+        idealsugar = compositions(1) / (compositions(0) + compositions(1) + compositions(2))            'Works out relative ratios of each stock in the drink
         idealice = compositions(2) / (compositions(0) + compositions(1) + compositions(2))
 
-        If Form1.weather = 2 And (ideallemon + idealsugar + idealice) = 1 Then
+        If Form1.weather = 2 And (ideallemon + idealsugar + idealice) = 1 Then          'If each stock is in the drink in the same quantites, and the weather is meh, the ideal meh weather is achieved
             weatherMultiplier = 2
             MsgBox("MEHHY")
-        ElseIf Form1.weather = 0 And ideallemon = 2 * idealsugar And idealice = 3 * idealsugar Then
+        ElseIf Form1.weather = 0 And ideallemon = 2 * idealsugar And idealice = 3 * idealsugar Then         'if  the ratio of l:s:i = 2:3:1, and the weather is sunny, the ideal sunny weather is achieved
             weatherMultiplier = 2
             MsgBox("SUNNY")
-        ElseIf Form1.weather = 1 And ideallemon = idealice And idealsugar = 2 * idealice Then
+        ElseIf Form1.weather = 1 And ideallemon = idealice And idealsugar = 2 * idealice Then       'If the ratio of l:s:i = 1:2:1, and the weather is cold, the ideal cold weather is achieved
             weatherMultiplier = 2
             MsgBox("COLD")
         Else
             weatherMultiplier = 1
         End If
 
-        totalsales += actualsales
+        totalsales += actualsales           'Add the sales of today to the total sales
 
-        Form1.Label4.Text = lemons.ToString
+        Form1.Label4.Text = lemons.ToString         'Update stock levels
         Form1.Label5.Text = sugar.ToString
         Form1.Label7.Text = ice.ToString
 
@@ -565,10 +565,10 @@ Public Class player
 
     Overridable Sub getprogress()
 
-        salesMultiplier = ((Math.Log10(totalsales)) / 100) + 1
+        salesMultiplier = ((Math.Log10(totalsales)) / 100) + 1          'Works out the multiplier you get based of the total past sales of the player. Uses a log to stop exponential growth in the end game
         Try
             If Math.Log10(totalsales) >= 5 Then
-                Composition.ProgressBar1.Value = 5
+                Composition.ProgressBar1.Value = 5          'Updates the sales bar - a visual representation of the users sales multiplier
             Else
                 Composition.ProgressBar1.Value = Math.Log10(totalsales)
             End If
@@ -579,24 +579,25 @@ Public Class player
 
     Overridable Sub getprofits(templemon As Integer, tempsugar As Integer, tempice As Integer)
 
-        Dim smallprofit As Integer
-        Dim bigprofit As Double
+        Dim bigprofit As Double         'The big profit is the total money made from selling lemonade on a day - usually in the 100s
+        Dim smallprofit As Integer      'The small profit is how much the users total money change from one day to the next - usually in the 10s
 
-        bigprofit = (((templemon + tempsugar + tempice) * actualsales) * salesMultiplier)
-        smallprofit = bigprofit - ((templemon + tempsugar + tempice) * actualsales)
 
-        money += (bigprofit + (upgradeMultiplier - 1) * smallprofit + (weatherMultiplier - 1) * smallprofit)
+        bigprofit = (((templemon + tempsugar + tempice) * actualsales) * salesMultiplier)      'Calculates how mush the stock sells for based on sales and the sales multiplier
+        smallprofit = bigprofit - ((templemon + tempsugar + tempice) * actualsales)         'Small profit is the big profit, minus the cost of buying all the stock in the first place
+
+        money += (bigprofit + (upgradeMultiplier - 1) * smallprofit + (weatherMultiplier - 1) * smallprofit)        'upgrades and weather effect the small profit, usually be doubling it
 
         moneyafter = money
 
 
-        profit = moneyafter - moneybefore
+        profit = moneyafter - moneybefore       'Works out the profit from one day to the next by comparing the money before buying stock and the money after selling it
 
-        Form1.Label12.Text = profit.ToString
+        Form1.Label12.Text = profit.ToString        'Updates profit and money labels
         Form1.Label2.Text = money.ToString
 
         If profit < 0 Then
-            Form1.PictureBox5.ImageLocation = "U:\Pictures\redprofit.png"
+            Form1.PictureBox5.ImageLocation = "U:\Pictures\redprofit.png"       'Sets the profit image to the red or the green one, depending on whether you make or loose money
             Form1.Label12.ForeColor = Color.Red
         ElseIf profit > 0 Then
             Form1.PictureBox5.ImageLocation = "U:\Pictures\profit.png"
@@ -611,13 +612,13 @@ Public Class player
 
             If reputation >= 1.5 Then
             Else
-                reputation += 0.1
+                reputation += 0.1           'If the user made too much lemonade, their reputation and expected customers increase
                 expected += expected * 0.1
             End If
         Else
             If reputation <= 0.5 Then
             Else
-                reputation -= 0.1
+                reputation -= 0.1           'If the user couldn't fulfull demand, their reputation and expected customers decrease
                 expected -= expected * 0.1
             End If
         End If
@@ -625,21 +626,21 @@ Public Class player
         If weatherMultiplier = 2 Then
             If reputation >= 1.5 Then
             Else
-                reputation += 0.1
+                reputation += 0.1               'If the user achieved the weather multiplier, their reputation and expected customers increase
                 expected += expected * 0.1
             End If
         Else
             If reputation <= 0.5 Then
-            ElseIf weatherMultiplier = 1 Then
+            ElseIf weatherMultiplier = 1 Then      'If the user didn't achieve the weather multiplier, their reputation and expected customers decrease
                 reputation -= 0.1
                 expected -= expected * 0.1
             End If
         End If
 
-        Form1.Label3.Text = reputation
+        Form1.Label3.Text = reputation      'Update the repuation and expected labels
         Form1.Label6.Text = expected
 
-        moneybefore = money
+        moneybefore = money             'Sets the moneybefore to the money before buying and stock for the next day
     End Sub
 
     Sub Getstar()
@@ -651,7 +652,7 @@ Public Class player
                 If reputation > 1 Then
                     Form1.PictureBox9.ImageLocation = "U:\Pictures\Star.Png"
                     If reputation > 1.2 Then
-                        Form1.PictureBox10.ImageLocation = "U:\Pictures\Star.Png"
+                        Form1.PictureBox10.ImageLocation = "U:\Pictures\Star.Png"           'Changes the amount of stars shown depening on reputation
                         If reputation > 1.4 Then
                             Form1.PictureBox11.ImageLocation = "U:\Pictures\Star.Png"
                         Else
@@ -676,7 +677,7 @@ Public Class player
 
         Form1.weather = CInt(Rnd() * 2)
         If Form1.weather = 0 Then
-            Form1.PictureBox6.ImageLocation = "U:\Pictures\sunny.PNG"
+            Form1.PictureBox6.ImageLocation = "U:\Pictures\sunny.PNG"           'Randomly generates weather for next day, and updates weather icon accordingly
             MsgBox("Sunny")
         ElseIf Form1.weather = 1 Then
             Form1.PictureBox6.ImageLocation = "U:\Pictures\cold.PNG"
@@ -692,7 +693,7 @@ Public Class player
 
     Overridable Sub calculate(tempsales As Integer, templemon As Integer, tempsugar As Integer, tempice As Integer)
         getsales(tempsales)
-        getweather(templemon, tempsugar, tempice)
+        getweather(templemon, tempsugar, tempice)               'This sub contains all the other subs that calculate the profit, so only one sub needs to be called from the composition form
         getprogress()
         getprofits(templemon, tempsugar, tempice)
         getreputations()
@@ -703,13 +704,15 @@ Public Class player
 End Class
 
 Public Class humanPlayer
-    Inherits player
+    Inherits player             'The human player inherits all the methods from the base class
 End Class
 
 Public Class AIPlayer
-    Inherits player
+    Inherits player                     'The AI player inherits all the methds from the base class, but has other variables, most notable the trial 2D array, and overrides a lot of methods with its own
     Private trial(4, 1002) As Integer      'lemon | Sugar | Ice | Weather | weatherMultiplier
-    Private trialcounter As Integer = 0
+    Private trialcounter As Integer = 0     'The number of trials performed, and acts as the ordinal number of a trial in the 2D array
+
+    'Buying stock and setting profit dowsnt need to update any labels for the ai player, so these new subs dont do this
 
     Overrides Function setmoney(addmoney As Integer)
         money += addmoney
@@ -730,60 +733,33 @@ Public Class AIPlayer
         profit = addprofit
     End Function
 
-    'Sub Learn() 'tempsales As Integer, templemon As Integer, tempsugar As Integer, tempice As Integer, weather As Integer)
-
-
-    '    For i As Integer = 0 To trialcounter
-    '        If trial(3, i) = Form1.weather Then
-    '            For j As Integer = 0 To 2
-    '                MsgBox(trial(j, i).ToString)
-    '            Next
-    '        End If
-    '    Next
-
-
-
-
-    'End Sub
-
-
-
-
     Overrides Sub calculate(tempsales As Integer, templemon As Integer, tempsugar As Integer, tempice As Integer)
 
         getsales(tempsales)
-        getweather(trial(0, trialcounter), trial(1, trialcounter), trial(2, trialcounter))
+        getweather(trial(0, trialcounter), trial(1, trialcounter), trial(2, trialcounter))      'This sub contains all the other subs that calculate the profit, so only one sub needs to be called from the composition form
         getprogress()
         getprofits(trial(0, trialcounter), trial(1, trialcounter), trial(2, trialcounter))
         getreputations()
-
-
-        'For i As Integer = 0 To trialcounter - 1
-        '    For j As Integer = 0 To 4
-        '        MsgBox("trial(" + j.ToString + "," + i.ToString + ") = " + trial(j, i).ToString)
-        '    Next
-
-        'Next
-        trialcounter += 1
+        trialcounter += 1                   'Increases the trial number for the next day
     End Sub
 
     Overrides Sub getsales(tempsales As Integer)
         Dim num As New Random
         varience = (num.Next(-10, 10))
 
-        deviation = (varience * reputation)
+        deviation = (varience * reputation)         'Calculates the deviation and actual sales in the same way as the humanPlayer 
 
         expected += deviation
 
         actualsales = expected
 
         'This is where it looks at the weather and sees if it either has the best combination, and a multiple of it, or just randomly tries again
-        Dim found As Boolean = 0
+        Dim found As Boolean = 0        'This boolean tells the game if the ideal composition for this weather is in the trial array
 
 
         For i As Integer = 1 To 10
             For j As Integer = 0 To trialcounter - 1
-                If trial(0, j) Mod i = 0 And trial(1, j) Mod i = 0 And trial(2, j) Mod i = 0 Then           'Cancels out common factors
+                If trial(0, j) Mod i = 0 And trial(1, j) Mod i = 0 And trial(2, j) Mod i = 0 Then           'Cancels out common factors, even if a trial wasn't successful
                     trial(0, j) = (trial(0, j) / i)
                     trial(1, j) = (trial(1, j) / i)
                     trial(2, j) = (trial(2, j) / i)
@@ -793,20 +769,22 @@ Public Class AIPlayer
 
 
         found = 0
+        Dim counter3 As Integer             'saves the location of the optimal composition
         For i As Integer = 0 To trialcounter - 1
             If trial(3, i) = Form1.weather And trial(4, i) = 2 Then
-                trial(0, trialcounter) = trial(0, i)                    'Checks to see if a solution that gets the multiplier has been discovered
+                trial(0, trialcounter) = trial(0, i)                    'Checks to see if a solution that gets the multiplier for tis weather has been discovered
                 trial(1, trialcounter) = trial(1, i)
                 trial(2, trialcounter) = trial(2, i)
                 found = 1
+                counter3 = i
                 MsgBox("found = " + found.ToString)
-                MsgBox("Ideal for " + Form1.weather.ToString + "=" + trial(0, i).ToString + " " + trial(1, i).ToString + " " + trial(2, i).ToString)
+                MsgBox("Ideal for " + Form1.weather.ToString + "=" + trial(0, i).ToString + " " + trial(1, i).ToString + " " + trial(2, i).ToString)    'Outputs what the ideal composition is
             End If
         Next
 
 
         If found = 1 Then
-            money = money - actualsales * (trial(0, trialcounter) + trial(1, trialcounter) + trial(2, trialcounter))
+            money = money - actualsales * (trial(0, counter3) + trial(1, counter3) + trial(2, counter3))        'If the ideal compositon is found, use this compositon to make lemmonade
         ElseIf found = 0 Then
 
 
@@ -818,10 +796,9 @@ Public Class AIPlayer
                 Randomize()
                 trial(2, trialcounter) = CInt(Math.Ceiling(Rnd() * 4))
 
-                If actualsales * (trial(0, trialcounter) + trial(1, trialcounter) + trial(2, trialcounter)) > money Then
+                If actualsales * (trial(0, trialcounter) + trial(1, trialcounter) + trial(2, trialcounter)) > money Then        'Check to see if the user can afford to buy the compositon they have chosen 
                 Else
-                    money = money - actualsales * (trial(0, trialcounter) + trial(1, trialcounter) + trial(2, trialcounter))
-                    MsgBox("test.,,,,,,,")
+                    money = money - actualsales * (trial(0, trialcounter) + trial(1, trialcounter) + trial(2, trialcounter))       'buys stock in the ratios randomly generated
                     MsgBox("found = " + found.ToString)
                     Exit Do
                 End If
@@ -832,7 +809,7 @@ Public Class AIPlayer
 
     Overrides Sub getweather(templemon As Integer, tempsugar As Integer, tempice As Integer)
         lemons -= actualsales * templemon
-        sugar -= actualsales * tempsugar
+        sugar -= actualsales * tempsugar                'Calculates weather multiplier in same was as human player
         ice -= actualsales * tempice
         compositions(0) = templemon
         compositions(1) = tempsugar
@@ -853,7 +830,7 @@ Public Class AIPlayer
             MsgBox("AI   *****COLD")
         Else
             weatherMultiplier = 1
-            MsgBox("FAIL = " + trial(0, trialcounter).ToString + trial(1, trialcounter).ToString + trial(2, trialcounter).ToString)
+            MsgBox("FAIL = " + trial(0, trialcounter).ToString + trial(1, trialcounter).ToString + trial(2, trialcounter).ToString)         'Outputs the ratio that was unsuccessful
         End If
 
         totalsales += actualsales
@@ -867,7 +844,7 @@ Public Class AIPlayer
         'COLD 1 lemon, 1 ice, 2 sugar
 
         If weatherMultiplier = 2 Then
-            MsgBox("composition = " + trial(0, trialcounter).ToString + trial(1, trialcounter).ToString + trial(2, trialcounter).ToString + "weather = " + Form1.weather.ToString)
+            MsgBox("composition = " + trial(0, trialcounter).ToString + trial(1, trialcounter).ToString + trial(2, trialcounter).ToString + "weather = " + Form1.weather.ToString)  'Outputs the optimal composition if it has found it
         End If
 
 
@@ -875,12 +852,12 @@ Public Class AIPlayer
     End Sub
 
     Overrides Sub getprogress()
-        salesMultiplier = ((Math.Log10(totalsales)) / 100) + 1
+        salesMultiplier = ((Math.Log10(totalsales)) / 100) + 1      'Works out sales multiplier
     End Sub
 
     Overridable Sub getprofits(templemon As Integer, tempsugar As Integer, tempice As Integer)
 
-        Dim smallprofit As Integer
+        Dim smallprofit As Integer          'A simpler versio of the humanPlayer getprofits as nothing needs to be updated, and the AI cant by upgrades
         Dim bigprofit As Integer
 
         bigprofit = (((templemon + tempsugar + tempice) * actualsales) * salesMultiplier)
@@ -889,10 +866,6 @@ Public Class AIPlayer
         money += (bigprofit + (weatherMultiplier - 1) * smallprofit)
 
         moneyafter = money
-        'MsgBox("expected = " + expected.ToString)
-        'MsgBox("bigprofit = " + bigprofit.ToString)
-        'MsgBox("smallprofit = " + smallprofit.ToString)
-        'MsgBox("money = " + money.ToString)
         profit = moneyafter - moneybefore
 
     End Sub
@@ -902,7 +875,7 @@ Public Class AIPlayer
 
             If reputation >= 1.5 Then
             Else
-                reputation += 0.1
+                reputation += 0.1               'Same as human player
                 expected += expected * 0.1
             End If
         Else
